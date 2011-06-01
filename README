@@ -1,2 +1,49 @@
-SCALA library for units of measure
+ScalaU is a Scala library for Dimensional calculations and Units of Measure.
+
+The main focus of ScalaU is a very strict compile-time checking of dimensional correctness, along with a very concise syntax. Unit conversion within the same dimension (e.g. meters to feet) is transparent.
+
+Dimensional correctness is enforced by restricting the allowed dimensional operations to the ones that make physical sense. For example, if a1 and a2 are two quantities representing Areas (square lengths), adding them would be ok, but multiplying them would not be allowed, since 4-dimensional "volumes" do not have a physical equivalent.
+
+To support this, Scalau provides a simple configuration file where the dimensions, units and operations are specified (in src/main/config/Units_XXXX.txt). Based on one of these config files CodeGen.scala generates the corresponding types and implicits that will be used in the main ScalaU library.
+
+Note:
+This operation-level control is not supported in other known Units of measure libraries or language features.
+F# supports ad-hoc creation of new units/dimensions, but it cannot restrict the allowed operations.
+Implenting something similar to F# in Scala with type arithmetic is possible, at the expense of flexibility of adding new dimensions and inability (?) to control allowed operations.
+
+The syntax is concise, DSL-like.
+Examples: 
+val len = 25 _ft   // Creates a Length object and immediatelly converts 25 feet to meters.  The number 25 is implicitly converted to a Length object, where "_ft" is a method on the generated Length class.
+
+val accel = 10.0 _m__s2  // Creates an Acceleration object: _m__s2 is a method on the generated Acceleration class. The methods representing units have the following convention: units preceded by one underscore have positive power, units preceded by 2 underscores have a negative power. So _m__s2 is equivalent to <m/s^2> or <m s^-2> in F#.
+
+Sample usage:
+
+	val speed1 = 10.0 _m__s;  
+	val time1 = 5 _min;   
+	val len1 = 25 _ft;
+	val len2 = 15 _km
+
+	val len2ft = len2 get "_ft"  // basic unit conversion (km to feet)
+
+	val len3 = len1 + len2
+	val area1 = len1 * len1
+	val area2 = len2 * len2
+	val area3 = area1 + area2
+	
+	val whatIsThis = area1 * area2  // compile error
+	val speed3 = speed1 + len2 / time1
+
+	val speed4 = speed3 * 5
+	require( speed4.isInstanceOf[Speed] )
+
+	val ratio = speed5 / speed4 
+	require( ratio.isInstanceOf[Double] )
+
+	// add this implicit if we really want to multiply Length and Time
+	implicit def mm(a:Length, b:Time) = new Length(a.x * b.x)   
+	val whatIsThis2 = 15._m * (42 _min)  // compile error if the implicit above is removed
+	
+
+
 
