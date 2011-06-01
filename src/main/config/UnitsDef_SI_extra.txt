@@ -1,0 +1,56 @@
+##Dimensions##
+// <DimensionName>; <equivalentInBaseUnits> ; <mainUnit>; <alternateUnit1>=<factor>; <alternateUnit2>=<factor>; ...
+
+// SI Base units
+Length; _m; _m; _mi=1609.344; _ft=0.3048; _in=0.0254; _km=1000; _mm=0.001
+Mass; _kg; _kg; lb=0.45359237; gram=0.001
+Time; _s; _s; _sec; _second; _min=60; _hour=3600
+ElectricCurrent; _A; _A
+Temperature; _K; _K                   //; C=K-273.15
+LumInstensity; _cd; _cd
+ChemicalAmount; _mol; _mol; _lbmol=453.59237
+
+// SI derived units
+Frequency; __s; _Hz
+Angle; _rad; _rad; _degree=0.017453292519943295
+SolidAngle; _sr; _sr
+Force; _kg_m__s2; _N
+Pressure; _kg__m__s2; _Pa; _N__m2; _kPa=1000
+Energy; _kg_m2__s2; _J; _N_m; _C_V; _W_s; _kWh=3.6e6; _Toe=4.1868e10
+Power; _kg_m2__s3; _W; _J__s; _V_A; _kW=1000; _hp=745.699872
+ElectricCharge; _s_A; _C
+Voltage; _kg_m2__s3__A; _V; _W__A; _J__C
+Capacitance; __kg__m2_s4_A2; _F; _C__V
+Resistance; _kg_m2__s3__A2; _ohm; _V__A
+Conductance; __kg__m2_s3_A2; _S; __ohm; _A__V
+MagneticFlux; _kg_m2__s2__A; _Wb; _J__A
+MagneticFluxDensity; _kg__s2__A; _T; 
+Inductance; _kg_m2__s2__A2; _H
+LuminousFlux; _cd; _lm; _cd_sr       //lumen  
+Illuminance; __m2_cd; _lx; _lm__m2   //lux
+Radioactivity; __s; _Bq              // decays per second
+AbsorbedDose; _m2__s2; _Gy; _J__kg
+EquivalentDose; _m2__s2; _Sv; _J__kg 
+CatalyticActivity; _mol__s; _kat 
+
+// Additional SI units
+Area; _m2; _m2
+Volume; _m3; _m3
+Speed; _m__s; _m__s; _km__hour=3.6; _km__h=3.6  
+Acceleration; _m__s2; _m__s2
+SpeedSquared; _m2__s2; _m2__s2
+
+// Other
+
+##Operations##
+
+Area=Length*Length
+Volume=Area*Length
+Length=Speed*Time
+Speed=Acceleration*Time   
+Force=Mass*Acceleration
+Power=Force*Speed
+Energy=Power*Time
+Energy=Mass*SpeedSquared
+
+
