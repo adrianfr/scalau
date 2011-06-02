@@ -13,15 +13,15 @@ Implenting something similar to F# in Scala with type arithmetic is possible, at
 
 The syntax is concise, DSL-like.
 Examples: 
-val len = 25 _ft   // Creates a Length object and immediatelly converts 25 feet to meters.  The number 25 is implicitly converted to a Length object, where "_ft" is a method on the generated Length class.
+val len = 25 _ft   // Creates a Length object and immediately converts 25 feet to meters.  The number 25 is implicitly converted to a Length object, where "_ft" is a method on the generated Length class.
 
 val accel = 10.0 _m__s2  // Creates an Acceleration object: _m__s2 is a method on the generated Acceleration class. The methods representing units have the following convention: units preceded by one underscore have positive power, units preceded by 2 underscores have a negative power. So _m__s2 is equivalent to <m/s^2> or <m s^-2> in F#.
 
 Sample usage:
 
-	val speed1 = 10.0 _m__s;  
-	val time1 = 5 _min;   
-	val len1 = 25 _ft;
+	val speed1 = 10.0 _m__s 
+	val time1 = 5 _min  
+	val len1 = 25 _ft
 	val len2 = 15 _km
 
 	val len2ft = len2 get "_ft"  // basic unit conversion (km to feet)
