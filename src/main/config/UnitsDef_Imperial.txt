@@ -39,8 +39,11 @@ Area=Length*Length
 Volume=Area*Length
 Length=Speed*Time
 Speed=Acceleration*Time   
+SpeedSquared=Speed*Speed
 Force=Mass*Acceleration
 Power=Force*Speed
+Power=Voltage*ElectricCurrent
+Voltage=ElectricCurrent*Resistance
 Energy=Power*Time
 Energy=Mass*SpeedSquared
 

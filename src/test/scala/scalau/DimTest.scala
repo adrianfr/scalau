@@ -8,7 +8,7 @@ import scalau.units.Units_SI_extra._
  * Most of the tests are about compile-time Dimensional checking;
  * If this compiles, the tests pass 
  */
-object DimTest extends App {
+object DimTest extends App { 
 
   def sameDim[A, B](implicit ev: A =:= B = null) = ev ne null
   
@@ -33,7 +33,7 @@ object DimTest extends App {
 	require( ratio.isInstanceOf[Double] )
 	
 	// testing comparators
-	len2 <=  len3 || len2 > len3
+	speed1 > speed2
 
 	//  Multiplication, division  - infer and create the correct new type
 	val newSpeed = new Length(99) / new Time(12)    // ==>Speed 

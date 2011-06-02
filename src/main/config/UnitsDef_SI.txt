@@ -11,6 +11,7 @@ LumInstensity; _cd; _cd
 ChemicalAmount; _mol; _mol;
 
 // SI derived units
+Scalar; _scalar; _scalar
 Frequency; __s; _Hz
 Angle; _rad; _rad; _degree=0.017453292519943295
 SolidAngle; _sr; _sr
@@ -40,15 +41,22 @@ Speed; _m__s; _m__s; _km__hour=3.6; _km__h=3.6
 Acceleration; _m__s2; _m__s2
 SpeedSquared; _m2__s2; _m2__s2
 
+// non-dimensionals
+Cycles; _cycles; _cycles
+Decays; _decays; _decays
+
 ##Operations##
 
 Area=Length*Length
 Volume=Area*Length
 Length=Speed*Time
 Speed=Acceleration*Time   
+SpeedSquared=Speed*Speed
 Force=Mass*Acceleration
 Power=Force*Speed
+Power=Voltage*ElectricCurrent
+Voltage=ElectricCurrent*Resistance
 Energy=Power*Time
 Energy=Mass*SpeedSquared
-
-
+Cycles=Frequency*Time
+Decays=Radioactivity*Time

@@ -335,6 +335,10 @@ object Units_Imperial {
 	implicit def Speed_d_Acceleration(a:Speed, b:Acceleration, op:Null) = new Time(a.x / b.x)
 	implicit def Speed_d_Time(a:Speed, b:Time, op:Null) = new Acceleration(a.x / b.x)
 
+	implicit def Speed_x_Speed(a:Speed, b:Speed) = new SpeedSquared(a.x * b.x)
+	implicit def SpeedSquared_d_Speed(a:SpeedSquared, b:Speed, op:Null) = new Speed(a.x / b.x)
+	implicit def sqroot(a: SpeedSquared, op:Null) = new Speed(scala.math.sqrt(a.x))
+
 	implicit def Mass_x_Acceleration(a:Mass, b:Acceleration) = new Force(a.x * b.x)
 	implicit def Acceleration_x_Mass(a:Acceleration, b:Mass) = new Force(a.x * b.x)
 	implicit def Force_d_Mass(a:Force, b:Mass, op:Null) = new Acceleration(a.x / b.x)
@@ -344,6 +348,16 @@ object Units_Imperial {
 	implicit def Speed_x_Force(a:Speed, b:Force) = new Power(a.x * b.x)
 	implicit def Power_d_Force(a:Power, b:Force, op:Null) = new Speed(a.x / b.x)
 	implicit def Power_d_Speed(a:Power, b:Speed, op:Null) = new Force(a.x / b.x)
+
+	implicit def Voltage_x_ElectricCurrent(a:Voltage, b:ElectricCurrent) = new Power(a.x * b.x)
+	implicit def ElectricCurrent_x_Voltage(a:ElectricCurrent, b:Voltage) = new Power(a.x * b.x)
+	implicit def Power_d_Voltage(a:Power, b:Voltage, op:Null) = new ElectricCurrent(a.x / b.x)
+	implicit def Power_d_ElectricCurrent(a:Power, b:ElectricCurrent, op:Null) = new Voltage(a.x / b.x)
+
+	implicit def ElectricCurrent_x_Resistance(a:ElectricCurrent, b:Resistance) = new Voltage(a.x * b.x)
+	implicit def Resistance_x_ElectricCurrent(a:Resistance, b:ElectricCurrent) = new Voltage(a.x * b.x)
+	implicit def Voltage_d_ElectricCurrent(a:Voltage, b:ElectricCurrent, op:Null) = new Resistance(a.x / b.x)
+	implicit def Voltage_d_Resistance(a:Voltage, b:Resistance, op:Null) = new ElectricCurrent(a.x / b.x)
 
 	implicit def Power_x_Time(a:Power, b:Time) = new Energy(a.x * b.x)
 	implicit def Time_x_Power(a:Time, b:Power) = new Energy(a.x * b.x)

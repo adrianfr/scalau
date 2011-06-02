@@ -78,6 +78,15 @@ object Units_SI {
 		def _mol = new ChemicalAmount(x * 1.0)
 	}
 
+	class Scalar(x:Double) extends Quantity(x) with Addable with Multipliable with Comparable {
+		type Impl = Scalar
+		def build(x:Double) = new Scalar(x)
+		val baseUnits = "_scalar"
+		val mainUnit = "_scalar"
+		val allUnits = Map[String, Double]("_scalar" -> 1.0)
+		def _scalar = new Scalar(x * 1.0)
+	}
+
 	class Frequency(x:Double) extends Quantity(x) with Addable with Multipliable with Comparable {
 		type Impl = Frequency
 		def build(x:Double) = new Frequency(x)
@@ -335,6 +344,24 @@ object Units_SI {
 		def _m2__s2 = new SpeedSquared(x * 1.0)
 	}
 
+	class Cycles(x:Double) extends Quantity(x) with Addable with Multipliable with Comparable {
+		type Impl = Cycles
+		def build(x:Double) = new Cycles(x)
+		val baseUnits = "_cycles"
+		val mainUnit = "_cycles"
+		val allUnits = Map[String, Double]("_cycles" -> 1.0)
+		def _cycles = new Cycles(x * 1.0)
+	}
+
+	class Decays(x:Double) extends Quantity(x) with Addable with Multipliable with Comparable {
+		type Impl = Decays
+		def build(x:Double) = new Decays(x)
+		val baseUnits = "_decays"
+		val mainUnit = "_decays"
+		val allUnits = Map[String, Double]("_decays" -> 1.0)
+		def _decays = new Decays(x * 1.0)
+	}
+
 	// implicit conversions: Double to <Dimension>
 
 	implicit def doubleToLength(x: Double) = new Length(x)
@@ -344,6 +371,7 @@ object Units_SI {
 	implicit def doubleToTemperature(x: Double) = new Temperature(x)
 	implicit def doubleToLumInstensity(x: Double) = new LumInstensity(x)
 	implicit def doubleToChemicalAmount(x: Double) = new ChemicalAmount(x)
+	implicit def doubleToScalar(x: Double) = new Scalar(x)
 	implicit def doubleToFrequency(x: Double) = new Frequency(x)
 	implicit def doubleToAngle(x: Double) = new Angle(x)
 	implicit def doubleToSolidAngle(x: Double) = new SolidAngle(x)
@@ -370,6 +398,8 @@ object Units_SI {
 	implicit def doubleToSpeed(x: Double) = new Speed(x)
 	implicit def doubleToAcceleration(x: Double) = new Acceleration(x)
 	implicit def doubleToSpeedSquared(x: Double) = new SpeedSquared(x)
+	implicit def doubleToCycles(x: Double) = new Cycles(x)
+	implicit def doubleToDecays(x: Double) = new Decays(x)
 
 
 
@@ -394,6 +424,10 @@ object Units_SI {
 	implicit def Speed_d_Acceleration(a:Speed, b:Acceleration, op:Null) = new Time(a.x / b.x)
 	implicit def Speed_d_Time(a:Speed, b:Time, op:Null) = new Acceleration(a.x / b.x)
 
+	implicit def Speed_x_Speed(a:Speed, b:Speed) = new SpeedSquared(a.x * b.x)
+	implicit def SpeedSquared_d_Speed(a:SpeedSquared, b:Speed, op:Null) = new Speed(a.x / b.x)
+	implicit def sqroot(a: SpeedSquared, op:Null) = new Speed(scala.math.sqrt(a.x))
+
 	implicit def Mass_x_Acceleration(a:Mass, b:Acceleration) = new Force(a.x * b.x)
 	implicit def Acceleration_x_Mass(a:Acceleration, b:Mass) = new Force(a.x * b.x)
 	implicit def Force_d_Mass(a:Force, b:Mass, op:Null) = new Acceleration(a.x / b.x)
@@ -404,6 +438,16 @@ object Units_SI {
 	implicit def Power_d_Force(a:Power, b:Force, op:Null) = new Speed(a.x / b.x)
 	implicit def Power_d_Speed(a:Power, b:Speed, op:Null) = new Force(a.x / b.x)
 
+	implicit def Voltage_x_ElectricCurrent(a:Voltage, b:ElectricCurrent) = new Power(a.x * b.x)
+	implicit def ElectricCurrent_x_Voltage(a:ElectricCurrent, b:Voltage) = new Power(a.x * b.x)
+	implicit def Power_d_Voltage(a:Power, b:Voltage, op:Null) = new ElectricCurrent(a.x / b.x)
+	implicit def Power_d_ElectricCurrent(a:Power, b:ElectricCurrent, op:Null) = new Voltage(a.x / b.x)
+
+	implicit def ElectricCurrent_x_Resistance(a:ElectricCurrent, b:Resistance) = new Voltage(a.x * b.x)
+	implicit def Resistance_x_ElectricCurrent(a:Resistance, b:ElectricCurrent) = new Voltage(a.x * b.x)
+	implicit def Voltage_d_ElectricCurrent(a:Voltage, b:ElectricCurrent, op:Null) = new Resistance(a.x / b.x)
+	implicit def Voltage_d_Resistance(a:Voltage, b:Resistance, op:Null) = new ElectricCurrent(a.x / b.x)
+
 	implicit def Power_x_Time(a:Power, b:Time) = new Energy(a.x * b.x)
 	implicit def Time_x_Power(a:Time, b:Power) = new Energy(a.x * b.x)
 	implicit def Energy_d_Power(a:Energy, b:Power, op:Null) = new Time(a.x / b.x)
@@ -413,6 +457,16 @@ object Units_SI {
 	implicit def SpeedSquared_x_Mass(a:SpeedSquared, b:Mass) = new Energy(a.x * b.x)
 	implicit def Energy_d_Mass(a:Energy, b:Mass, op:Null) = new SpeedSquared(a.x / b.x)
 	implicit def Energy_d_SpeedSquared(a:Energy, b:SpeedSquared, op:Null) = new Mass(a.x / b.x)
+
+	implicit def Frequency_x_Time(a:Frequency, b:Time) = new Cycles(a.x * b.x)
+	implicit def Time_x_Frequency(a:Time, b:Frequency) = new Cycles(a.x * b.x)
+	implicit def Cycles_d_Frequency(a:Cycles, b:Frequency, op:Null) = new Time(a.x / b.x)
+	implicit def Cycles_d_Time(a:Cycles, b:Time, op:Null) = new Frequency(a.x / b.x)
+
+	implicit def Radioactivity_x_Time(a:Radioactivity, b:Time) = new Decays(a.x * b.x)
+	implicit def Time_x_Radioactivity(a:Time, b:Radioactivity) = new Decays(a.x * b.x)
+	implicit def Decays_d_Radioactivity(a:Decays, b:Radioactivity, op:Null) = new Time(a.x / b.x)
+	implicit def Decays_d_Time(a:Decays, b:Time, op:Null) = new Radioactivity(a.x / b.x)
 
 }
 

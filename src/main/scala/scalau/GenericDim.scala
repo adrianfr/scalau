@@ -90,7 +90,7 @@ trait Addable {
    */
   def +(other: Impl) = {
     val r = build(x + other.x)
-    println("Addition: " + x + "+" + other.x + "=" + r)
+//    println("Addition: " + x + "+" + other.x + "=" + r)
     r
   }
   
@@ -99,7 +99,7 @@ trait Addable {
    */
   def -(other: Impl) = {
     val r = build(x - other.x)
-    println("Subtraction: " + x + "-" + other.x + "=" + r)
+//    println("Subtraction: " + x + "-" + other.x + "=" + r)
     r
   }
   
@@ -108,7 +108,7 @@ trait Addable {
    */
   def *(num: Double): Impl = {   // or self.Impl
     val r = build(x * num)
-    println("Mult with scalar: " + x + "*" + num + "=" + r)
+//    println("Mult with scalar: " + x + "*" + num + "=" + r)
     r
   }
   
@@ -117,7 +117,7 @@ trait Addable {
    */
   def /(num: Double): Impl = {   // or self.Impl
     val r = build(x / num)
-    println("Div with scalar: " + x + "/" + num + "=" + r)
+//    println("Div with scalar: " + x + "/" + num + "=" + r)
     r
   }
   
@@ -126,7 +126,7 @@ trait Addable {
    */
   def /(other: Impl): Double = {
     val r = x / other.x
-    println("Division with same Dimension: " + x + "/" + other.x + "=" + r)
+//    println("Division with same Dimension: " + x + "/" + other.x + "=" + r)
     r
   }
 
@@ -144,17 +144,17 @@ trait Multipliable {
   // the implicit functions only need to provide the resulting type/dimension
   def *[B <: Quantity, Res <: Quantity](other: B)(implicit mult: (this.type, B) => Res): Res = {
     val r = mult(self, other)
-    println("" + x + "*" + other.x + "=" + r)
+//    println("" + x + "*" + other.x + "=" + r)
     r
   }
   def /[B <: Quantity, Res <: Quantity](other: B)(implicit divide: (this.type, B, Null) => Res): Res = {
     val r = divide(this, other, null)
-    println("" + x + "/" + other.x + "=" + r)
+//    println("" + x + "/" + other.x + "=" + r)
     r
   }
   def sqrt[Res <: Quantity](implicit sqroot: (this.type, Null) => Res): Res = {
     val r = sqroot(this, null)
-    println("" + x + " sqrt=" + r)
+//    println("" + x + " sqrt=" + r)
     r
   }
 }
