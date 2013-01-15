@@ -1,7 +1,6 @@
 bin/
-project/boot/
+project/target/
 target/
 .classpath
 .project
 .scala_dependencies
-

@@ -54,7 +54,7 @@ object CodeGen {
 	 /**
 	 * Main generator function
 	 */
-	def generate(setName: String, defFileName: String, scalaFileName: String) {
+	def generate(setName: String, defFileName: String, scalaFileName: String): String = {
 	  val (dimDef, opsDef) = readDefs(defFileName)
 	  val dimList: List[DimRepr] = readDimensions(dimDef)
 	  val dimClassesCode = genDimClasses(dimList)
@@ -63,7 +63,7 @@ object CodeGen {
 	  val opsCode = genOperationsCode(opsList, dimList)
 	  val code = s00(setName) + s01 + s02 + s03(setName) + dimClassesCode + dimImplCode + opsCode + s99
 	  Files.writeToFile(scalaFileName:String, code)
-	  code 
+	  code
 	}
 	
 	/**
